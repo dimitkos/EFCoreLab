@@ -4,14 +4,16 @@ using Lab.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lab.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201130124315_addonetooneboohbookdetail")]
+    partial class addonetooneboohbookdetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,9 +178,6 @@ namespace Lab.DataAccess.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("Publisher_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -187,8 +186,6 @@ namespace Lab.DataAccess.Migrations
 
                     b.HasIndex("BookDetail_Id")
                         .IsUnique();
-
-                    b.HasIndex("Publisher_Id");
 
                     b.ToTable("Fluent_Books");
                 });
@@ -312,15 +309,7 @@ namespace Lab.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Lab.Model.Models.Fluent_Publisher", "Fluent_Publisher")
-                        .WithMany("Fluent_Books")
-                        .HasForeignKey("Publisher_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Fluent_BookDetail");
-
-                    b.Navigation("Fluent_Publisher");
                 });
 
             modelBuilder.Entity("Lab.Model.Models.BookDetail", b =>
@@ -331,11 +320,6 @@ namespace Lab.DataAccess.Migrations
             modelBuilder.Entity("Lab.Model.Models.Fluent_BookDetail", b =>
                 {
                     b.Navigation("Fluent_Book");
-                });
-
-            modelBuilder.Entity("Lab.Model.Models.Fluent_Publisher", b =>
-                {
-                    b.Navigation("Fluent_Books");
                 });
 
             modelBuilder.Entity("Lab.Model.Models.Publisher", b =>

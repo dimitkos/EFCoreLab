@@ -30,13 +30,23 @@ namespace Lab.DataAccess.Data
 
             //BookDetails
             modelBuilder.Entity<Fluent_BookDetail>().HasKey(x => x.BookDetail_Id);
-            modelBuilder.Entity<Fluent_BookDetail>().Property(x => x.NumberOfChapters).IsRequired();
+            modelBuilder.Entity<Fluent_BookDetail>().Property(x => x.NumberOfChapters).IsRequired();          
 
             //Book
             modelBuilder.Entity<Fluent_Book>().HasKey(x => x.Book_Id);
             modelBuilder.Entity<Fluent_Book>().Property(x => x.ISBN).IsRequired().HasMaxLength(15);
             modelBuilder.Entity<Fluent_Book>().Property(x => x.Title).IsRequired();
             modelBuilder.Entity<Fluent_Book>().Property(x => x.Price).IsRequired();
+            //one to one relationship between book and book detail
+            modelBuilder.Entity<Fluent_Book>()
+                .HasOne(x => x.Fluent_BookDetail)
+                .WithOne(x => x.Fluent_Book)
+                .HasForeignKey<Fluent_Book>("BookDetail_Id");
+            //one to many relationship between book and publishers
+            modelBuilder.Entity<Fluent_Book>()
+                .HasOne(x => x.Fluent_Publisher)
+                .WithMany(x => x.Fluent_Books)
+                .HasForeignKey(x=> x.Publisher_Id);
 
             //Author
             modelBuilder.Entity<Fluent_Author>().HasKey(x => x.Author_Id);
@@ -48,7 +58,6 @@ namespace Lab.DataAccess.Data
             modelBuilder.Entity<Fluent_Publisher>().HasKey(x => x.Publisher_Id);
             modelBuilder.Entity<Fluent_Publisher>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Fluent_Publisher>().Property(x => x.Location).IsRequired();
-
         }
     }
 }
