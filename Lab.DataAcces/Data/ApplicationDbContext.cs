@@ -10,7 +10,7 @@ namespace Lab.DataAccess.Data
 
         }
 
-        //public DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
@@ -24,6 +24,10 @@ namespace Lab.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Category
+            modelBuilder.Entity<Category>().ToTable("tbl_category");
+            modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("CategoryName");
+
             //BookDetails
             modelBuilder.Entity<Fluent_BookDetail>().HasKey(x => x.BookDetail_Id);
             modelBuilder.Entity<Fluent_BookDetail>().Property(x => x.NumberOfChapters).IsRequired();
@@ -44,6 +48,7 @@ namespace Lab.DataAccess.Data
             modelBuilder.Entity<Fluent_Publisher>().HasKey(x => x.Publisher_Id);
             modelBuilder.Entity<Fluent_Publisher>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Fluent_Publisher>().Property(x => x.Location).IsRequired();
+
         }
     }
 }
