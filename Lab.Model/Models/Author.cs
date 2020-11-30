@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,7 @@ namespace Lab.Model.Models
         //public string FullName { get; set; }
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
+
+        public ICollection<Book> Books { get; set; }
     }
 }

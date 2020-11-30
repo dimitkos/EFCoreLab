@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Lab.Model.Models
@@ -24,5 +25,7 @@ namespace Lab.Model.Models
         [ForeignKey("Publisher")]
         public int Publisher_Id { get; set; }
         public Publisher Publisher { get; set; }
+
+        public  ICollection<Author> Authors { get; set; }
     }
 }
