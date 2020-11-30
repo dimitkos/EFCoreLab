@@ -13,6 +13,7 @@ namespace Lab.DataAccess.Data
         //public DbSet<Category> Categories { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BookDetail> BookDetails { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Fluent_BookDetail> Fluent_BookDetails { get; set; }
