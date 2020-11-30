@@ -15,5 +15,14 @@ namespace Lab.DataAccess.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Fluent_BookDetail> Fluent_BookDetails { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //BookDetails
+            modelBuilder.Entity<Fluent_BookDetail>().HasKey(x => x.BookDetail_Id);
+            modelBuilder.Entity<Fluent_BookDetail>().Property(x => x.NumberOfChapters).IsRequired();
+        }
     }
 }
