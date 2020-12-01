@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lab.Model.Models
 {
@@ -10,5 +11,6 @@ namespace Lab.Model.Models
         public DateTime BirthDate { get; set; }
         public string Location { get; set; }
         public string FullName => $"{FirstName} {LastName}";
+        public ICollection<Fluent_Book> Fluent_Books { get; set; }
     }
 }

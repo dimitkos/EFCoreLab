@@ -1,4 +1,6 @@
-﻿namespace Lab.Model.Models
+﻿using System.Collections.Generic;
+
+namespace Lab.Model.Models
 {
     public class Fluent_Book
     {
@@ -12,5 +14,7 @@
 
         public int Publisher_Id { get; set; }
         public Fluent_Publisher Fluent_Publisher { get; set; }
+
+        public ICollection<Fluent_Author> Fluent_Authors { get; set; }
     }
 }

@@ -47,6 +47,10 @@ namespace Lab.DataAccess.Data
                 .HasOne(x => x.Fluent_Publisher)
                 .WithMany(x => x.Fluent_Books)
                 .HasForeignKey(x=> x.Publisher_Id);
+            //many to many relationship between book and author
+            modelBuilder.Entity<Fluent_Book>()
+                .HasMany(x => x.Fluent_Authors)
+                .WithMany(x => x.Fluent_Books);
 
             //Author
             modelBuilder.Entity<Fluent_Author>().HasKey(x => x.Author_Id);
