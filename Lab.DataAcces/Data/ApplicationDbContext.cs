@@ -25,7 +25,7 @@ namespace Lab.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Category
+            //Category, hybric config with data annotations
             modelBuilder.Entity<Category>().ToTable("tbl_category");
             modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnName("CategoryName");
 
