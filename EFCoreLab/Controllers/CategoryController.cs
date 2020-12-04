@@ -38,5 +38,28 @@ namespace EFCoreLab.Controllers
 
             return View(category);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Category category)
+        {
+            if(ModelState.IsValid)
+            {
+                if(category.Category_Id == 0)
+                {
+                    //this is create
+                    _context.Categories.Add(category);
+                }
+                else
+                {
+                    //this is update
+                    _context.Categories.Update(category);
+                }
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(category);
+        }
     }
 }
