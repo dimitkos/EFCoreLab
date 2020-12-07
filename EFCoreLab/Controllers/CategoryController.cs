@@ -61,5 +61,14 @@ namespace EFCoreLab.Controllers
 
             return View(category);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var category = _context.Categories.FirstOrDefault(x=> x.Category_Id == id);
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
