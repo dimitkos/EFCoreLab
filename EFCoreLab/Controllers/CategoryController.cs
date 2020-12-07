@@ -98,5 +98,33 @@ namespace EFCoreLab.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult RemoveMultiple2()
+        {
+            //take the last 2 categories
+            IEnumerable<Category> categoryList = _context.Categories
+                .OrderByDescending(x => x.Category_Id)
+                .Take(2)
+                .ToList();
+
+            _context.RemoveRange(categoryList);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult RemoveMultiple5()
+        {
+            //take the last 2 categories
+            IEnumerable<Category> categoryList = _context.Categories
+                .OrderByDescending(x => x.Category_Id)
+                .Take(5)
+                .ToList();
+
+            _context.RemoveRange(categoryList);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
