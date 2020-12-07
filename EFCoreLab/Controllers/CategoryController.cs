@@ -1,6 +1,7 @@
 ﻿using Lab.DataAccess.Data;
 using Lab.Model.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,9 +44,9 @@ namespace EFCoreLab.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Category category)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                if(category.Category_Id == 0)
+                if (category.Category_Id == 0)
                 {
                     //this is create
                     _context.Categories.Add(category);
@@ -64,8 +65,35 @@ namespace EFCoreLab.Controllers
 
         public IActionResult Delete(int id)
         {
-            var category = _context.Categories.FirstOrDefault(x=> x.Category_Id == id);
+            var category = _context.Categories.FirstOrDefault(x => x.Category_Id == id);
             _context.Categories.Remove(category);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateMultiple2()
+        {
+            List<Category> categoryList = new List<Category>();
+            for (int i = 1; i <= 2; i++)
+            {
+                categoryList.Add(new Category { Name = Guid.NewGuid().ToString() });
+            }
+            _context.AddRange(categoryList);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateMultiple5()
+        {
+            List<Category> categoryList = new List<Category>();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                categoryList.Add(new Category { Name = Guid.NewGuid().ToString() });
+            }
+            _context.AddRange(categoryList);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
